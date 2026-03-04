@@ -1,6 +1,5 @@
 package com.udea.bank.controller;
-import com.udea.bank.dto.TransactionDTO;
-import com.udea.bank.dto.TransferRequestDTO;
+import com.udea.bank.DTO.TransactionDTO;
 import com.udea.bank.service.TransactionService;
 //import com.udea.banco2025.service.TransactionServiceBK;
 import org.springframework.beans.factory.annotation.Autowired;
