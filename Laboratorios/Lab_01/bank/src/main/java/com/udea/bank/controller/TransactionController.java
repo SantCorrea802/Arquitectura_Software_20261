@@ -1,17 +1,12 @@
 package com.udea.bank.controller;
 import com.udea.bank.DTO.TransactionDTO;
 import com.udea.bank.service.TransactionService;
-//import com.udea.banco2025.service.TransactionServiceBK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controlador REST para gestionar transacciones financieras.
- * Proporciona endpoints para transferencias de dinero y consulta de transacciones de un usuario.
- */
 @RestController
 @RequestMapping(value="/api/transactions", produces = "application/json")
 public class TransactionController {

@@ -25,11 +25,8 @@ public class TransactionService {
         }
 //Buscar los clientes por numero de cuenta
         Customer sender =
-                customerRepository.findByAccountNumber(transactionDTO.getSenderAccountNumber())
-                        .orElseThrow(()-> new IllegalArgumentException("Sender Account Number not found"));
-                                Customer receiver =
-                                customerRepository.findByAccountNumber(transactionDTO.getReceiverAccountNumber())
-                                        .orElseThrow(()-> new IllegalArgumentException("Receiver Account Number not found"));
+                customerRepository.findByAccountNumber(transactionDTO.getSenderAccountNumber()).orElseThrow(()-> new IllegalArgumentException("Sender Account Number not found"));
+                                Customer receiver = customerRepository.findByAccountNumber(transactionDTO.getReceiverAccountNumber()).orElseThrow(()-> new IllegalArgumentException("Receiver Account Number not found"));
 //Validar que el remitente tenga saldo suficiente
         if(sender.getBalance() < transactionDTO.getAmount()){
             throw new IllegalArgumentException("Sender Balance not enough");
