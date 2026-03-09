@@ -1,7 +1,6 @@
 package com.udea.bank.entity;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Generated;
 import java.time.LocalDateTime;
 
 //POJO --> Plain old java object

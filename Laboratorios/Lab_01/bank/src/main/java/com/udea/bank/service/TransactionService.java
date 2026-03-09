@@ -8,6 +8,7 @@ import com.udea.bank.repository.CustomerRepository;
 import com.udea.bank.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -42,6 +43,7 @@ public class TransactionService {
         transaction.setSenderAccountNumber(sender.getAccountNumber());
         transaction.setReceiverAccountNumber(receiver.getAccountNumber());
         transaction.setAmount(transactionDTO.getAmount());
+        transaction.setTimestamp(LocalDateTime.now());
         transaction= transactionRepository.save(transaction);
 //Devolver la transaccion creada como un DTO
         TransactionDTO savedTransaction = new TransactionDTO();
@@ -63,5 +65,62 @@ public class TransactionService {
             dto.setAmount(transaction.getAmount());
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    public TransactionDTO getTransactionById(Long id) {
+
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Transaction not found"));
+        TransactionDTO dto = new TransactionDTO();
+        dto.setId(transaction.getId());
+        dto.setSenderAccountNumber(transaction.getSenderAccountNumber());
+        dto.setReceiverAccountNumber(transaction.getReceiverAccountNumber());
+        dto.setAmount(transaction.getAmount());
+        return dto;
+    }
+
+    public TransactionDTO createTransaction(TransactionDTO transactionDTO) {
+        Transaction transaction = new Transaction();
+        transaction.setSenderAccountNumber(transactionDTO.getSenderAccountNumber());
+        transaction.setReceiverAccountNumber(transactionDTO.getReceiverAccountNumber());
+        transaction.setAmount(transactionDTO.getAmount());
+        transaction.setTimestamp(LocalDateTime.now());
+        transaction= transactionRepository.save(transaction);
+        TransactionDTO savedTransaction = new TransactionDTO();
+        savedTransaction.setId(transaction.getId());
+        savedTransaction.setSenderAccountNumber(transaction.getSenderAccountNumber());
+        savedTransaction.setReceiverAccountNumber(transaction.getReceiverAccountNumber());
+        savedTransaction.setAmount(transaction.getAmount());
+        return savedTransaction;
+    }
+
+    public List<TransactionDTO> getAllTransactions() {
+        List<Transaction> transactions = transactionRepository.findAll();
+        return transactions.stream().map(transaction -> {
+            TransactionDTO dto = new TransactionDTO();
+            dto.setId(transaction.getId());
+            dto.setSenderAccountNumber(transaction.getSenderAccountNumber());
+            dto.setReceiverAccountNumber(transaction.getReceiverAccountNumber());
+            dto.setAmount(transaction.getAmount());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    public TransactionDTO updateTransaction(Long id, TransactionDTO transactionDTO) {
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Transaction not found"));
+        transaction.setSenderAccountNumber(transactionDTO.getSenderAccountNumber());
+        transaction.setReceiverAccountNumber(transactionDTO.getReceiverAccountNumber());
+        transaction.setAmount(transactionDTO.getAmount());
+        transaction= transactionRepository.save(transaction);
+        TransactionDTO updatedTransaction = new TransactionDTO();
+        updatedTransaction.setId(transaction.getId());
+        updatedTransaction.setSenderAccountNumber(transaction.getSenderAccountNumber());
+        updatedTransaction.setReceiverAccountNumber(transaction.getReceiverAccountNumber());
+        updatedTransaction.setAmount(transaction.getAmount());
+        return updatedTransaction;
+    }
+
+    public void deleteTransaction(Long id) {
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Transaction not found"));
+        transactionRepository.delete(transaction);
     }
 }
