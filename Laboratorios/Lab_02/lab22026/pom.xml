@@ -80,6 +80,8 @@
 			</plugin>
 
 		</plugins>
+
+		<finalName>lab22026</finalName>
 	</build>
 
 </project>
