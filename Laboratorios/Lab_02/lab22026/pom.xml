@@ -28,6 +28,9 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<sonar.projectkey>SantCorrea802_Arquitectura_Software_20261</sonar.projectkey>
+		<sonar.organization>santcorrea802</sonar.organization>
+		<sonar.host.url>http://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
