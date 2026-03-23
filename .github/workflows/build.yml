@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - '.github/workflows/build.yml'
-      - 'Laboratorios/Lab_02/**'
+      - 'Laboratorios/Lab_02/lab22026/**'
 
 jobs:
   tests:
@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./Laboratorios/Lab_02
+        working-directory: ./Laboratorios/Lab_02/lab22026
 
     steps:
       - name: Checkout repository
