@@ -123,3 +123,15 @@ jobs:
           name: artifact
           #From this path
           path: ./Laboratorios/Lab_02/lab22026/target/lab22026.jar
+
+
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: santcorrea/lab22026
+          tags: latest
+          registry: docker.io
+          dockerfile: ./Laboratorios/Lab_02/lab22026/Dockerfile
+          directory: ./Laboratorios/Lab_02/lab22026
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
