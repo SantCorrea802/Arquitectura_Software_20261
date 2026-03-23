@@ -8,12 +8,18 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Laboratorios/Lab_02/**'
 jobs:
   #Test's job
   tests:
     name: Unit tests
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./Laboratorios/Lab_02
     #Job's steps
     steps:
       #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
